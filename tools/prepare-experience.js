@@ -1,6 +1,6 @@
 const fs = require('fs');
 const issue = require('../issue.json');
-const [issueExperience, issueTitle, issueScreenshot, issueDescription, issueCategories, issueLanguage, issueAuthor, name, id] = Object.values(issue);
+const [issueExperience, issueTitle, issueScreenshot, issueDescription, issueCategories, issueLanguage, trash, issueAuthor, name, id] = Object.values(issue);
 
 const author = "https://github.com/" + issueAuthor;
 const license = "MIT";
