@@ -9,10 +9,16 @@ jobs:
   validate-experience:
     if: github.event.pull_request.label == 'new-experience'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
       - name: Resolve experience name
-        run: echo "experience_name=$(echo ${{ github.event.pull_request.branch }} | cut -d' ' -f2)" >> "$GITHUB_ENV"
+        run: |
+          echo ${{ github.event.pull_request.branch }}
+          echo "experience_name=$(echo ${{ github.event.pull_request.branch }} | cut -d' ' -f2)" >> "$GITHUB_ENV"
       - name: Run validator
         run: |
           ./cli/usecasevalidator -path experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate
