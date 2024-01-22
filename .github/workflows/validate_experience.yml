@@ -7,13 +7,14 @@ name: Validate Experience
 
 jobs:
   validate-experience:
-    if: github.event.pull_request.label == 'new-experience'
+#    if: github.event.pull_request.label == 'new-experience'
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
       issues: write
     steps:
+      - run: echo ${{ github.event.pull_request.label }}
       - uses: actions/checkout@v4
       - name: Resolve experience name
         run: |
