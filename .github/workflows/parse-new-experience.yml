@@ -33,6 +33,9 @@ jobs:
           jq --arg file_size $file_size '.fileSize = ($file_size|tonumber)' "experiences/${{ env.experience_name }}/test-manifest.json" > temp.json && mv temp.json "experiences/${{ env.experience_name }}/test-manifest.json"
           rm -f temp.json
           echo "test-manifest=anytype://main/import/?type=experience&source=https%3A%2F%2Fgithub.com%2Fanyproto%2Fgallery%2Fraw%2F${{ env.experience_name }}%2Fexperiences%2F${{ env.experience_name }}%2Ftest-manifest.json" >> "$GITHUB_ENV"
+      - name: Run experience validator
+        run: |
+          ./cli/usecasevalidator -path experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v5
@@ -43,7 +46,6 @@ jobs:
           delete-branch: true
           title: "Add experience ${{ steps.issue-parser.outputs.issueparser_title }}"
           body: "Based on issue #${{ github.event.issue.number }}"
-          labels: 'new-experience'
       - name: Comment on Issue
         run: gh issue comment "$NUMBER" --body "$BODY"
         env:
