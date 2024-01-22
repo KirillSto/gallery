@@ -38,10 +38,10 @@ jobs:
         run: |
           ./cli/usecasevalidator -path experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list
           echo $?
-          if 0 -eq 0; then
+          if [ 0 -eq 0 ]; then
             echo "WOW"
           fi
-          if $? -eq 0; then
+          if [ $? -eq 0 ]; then
             echo "Rewriting archive with the processed one"
             mv experiences/${{ env.experience_name }}/${{ env.experience_name }}_new.zip experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip
           fi
