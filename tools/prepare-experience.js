@@ -21,7 +21,7 @@ var experience = {
   fileSize: 0
 }
 
-console.log(`Issie.json info: ${issueExperience}, ${issueTitle}, ${issueScreenshot}, ${issueDescription}, ${issueCategories}, ${issueLanguage}, ${issueAuthor}, ${name}, ${id}`)
+console.log(`Issie.json info: exp=${issueExperience}, title=${issueTitle}, scr=${issueScreenshot}, desc=${issueDescription}, cat=${issueCategories}, lang=${issueLanguage}, auth=${issueAuthor}, name=${name}, id=${id}`)
 
 if (!fs.existsSync('experiences')) {
   fs.mkdirSync('experiences');
