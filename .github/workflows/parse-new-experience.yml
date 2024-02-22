@@ -37,7 +37,7 @@ jobs:
 
       - name: Download experience validator
         run: |
-          git clone git@github.com:anyproto/anytype-heart.git
+          git clone https://github.com/anyproto/anytype-heart.git
           echo "Cloned"
 
       - name: Install Go
