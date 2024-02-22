@@ -53,7 +53,7 @@ jobs:
 
       - name: Run experience validator
         run: |
-          ./anytype-heart/cmd/usecasevalidator -path experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list
+          ./anytype-heart/cmd/usecasevalidator/usecasevalidator -path experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list
           echo $?
           if [ 0 -eq 0 ]; then
             echo "WOW"
