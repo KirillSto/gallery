@@ -76,7 +76,6 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       - name: Create experience name and id
-        if: ${{ env.zip_file_missing == 'false' && env.restrictions_exceeded == 'false' && env.incorrect_screen_format == 'false' && env.validation_error == 'false' }}
         run: |
           echo "experience_name=$(echo '${{ steps.issue-parser.outputs.issueparser_title }}' | sed -e 's/[^[:alnum:]]/_/g' | tr -s '_' | tr A-Z a-z)" >> "$GITHUB_ENV"
           echo "id=$(uuidgen)" >> "$GITHUB_ENV"
