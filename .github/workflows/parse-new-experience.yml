@@ -86,6 +86,8 @@ jobs:
           cd anytype-heart/cmd/usecasevalidator
           go build .
           echo "Validator is built"
+          ./usecasevalidator -path experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list
+          echo "Validate #1"
           validation_comment=$(./usecasevalidator -path experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list)
           if [ $? -eq 0 ]; then
             echo "Rewriting archive with the processed one"
@@ -95,6 +97,7 @@ jobs:
             echo "validation_error=true" >> "$GITHUB_ENV"
             echo "validation_comment=${validation_comment}" >> "$GITHUB_ENV"
           fi
+          cd ../../../
           rm -rf anytype-heart/
 
       - name: Comment and add label to issue
