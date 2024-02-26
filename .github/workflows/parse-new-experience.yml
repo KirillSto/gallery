@@ -88,20 +88,21 @@ jobs:
       - name: Run experience validator
         run: |
           git clone https://github.com/anyproto/anytype-heart.git
-          go build anytype-heart/cmd/usecasevalidator
+          cd anytype-heart/cmd/usecasevalidator
+          go build .
           echo "Validator is built"
-          ./anytype-heart/cmd/usecasevalidator/usecasevalidator -path experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list
+          ./usecasevalidator -path ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list
           echo "Validate #1"
-          validation_comment=$(./anytype-heart/cmd/usecasevalidator/usecasevalidator -path experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list)
+          validation_comment=$(./usecasevalidator -path ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list)
           if [ $? -eq 0 ]; then
             echo "Rewriting archive with the processed one"
             echo "validation_error=false" >> "$GITHUB_ENV"
-            mv experiences/${{ env.experience_name }}/${{ env.experience_name }}_new.zip experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip
+            mv ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}_new.zip ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip
           else
             echo "validation_error=true" >> "$GITHUB_ENV"
             echo "validation_comment=${validation_comment}" >> "$GITHUB_ENV"
           fi
-          rm -rf anytype-heart/
+          rm -rf ../../../anytype-heart/
 
       - name: Comment and add label to issue
         if: ${{ env.zip_file_missing == 'true' || env.restrictions_exceeded == 'true' || env.incorrect_screen_format == 'true' || env.validation_error == 'true' }}
