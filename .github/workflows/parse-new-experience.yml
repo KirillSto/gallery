@@ -91,6 +91,8 @@ jobs:
           cd anytype-heart/cmd/usecasevalidator
           go build .
           echo "Validator is built"
+          ls ../../..
+          ls ../../../experiences
           ./usecasevalidator -path ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list
           echo "Validate #1"
           validation_comment=$(./usecasevalidator -path ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list)
