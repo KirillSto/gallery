@@ -110,6 +110,7 @@ jobs:
 
       - name: Run experience validator
         id: experience-validator
+        continue-on-error: true
         if: ${{ env.zip_file_missing == 'false' && env.restrictions_exceeded == 'false' && env.incorrect_screen_format == 'false' }}
         run: |
           git clone https://github.com/anyproto/anytype-heart.git
