@@ -109,7 +109,6 @@ jobs:
 
       - name: Run experience validator
         id: experience-validator
-        continue-on-error: true
         if: ${{ env.zip_file_missing == 'false' && env.restrictions_exceeded == 'false' && env.incorrect_screen_format == 'false' }}
         run: |
           git clone https://github.com/anyproto/anytype-heart.git
@@ -117,9 +116,9 @@ jobs:
           go build .
           echo "Validator is built"
           set +e
-          validation_comment=$(./usecasevalidator -path ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list)
+          validation_output=$(./usecasevalidator -path ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list)
           validation_result="$?"
-          echo "${validation_comment}"
+          echo "${validation_output}"
           if [ ${validation_result} -eq 0 ]; then
             echo "Rewriting archive with the processed one"
             echo "validation_error=false" >> "$GITHUB_ENV"
@@ -129,6 +128,7 @@ jobs:
             rm -rf ../../../experiences/${{ env.experience_name }}/
           fi
           rm -rf ../../../anytype-heart/
+          validation_comment=$(echo "<details><summary>Expand to see validator output</summary>${validation_output}</details>")
 
       - name: Comment and add label to issue
         if: ${{ env.zip_file_missing == 'true' || env.restrictions_exceeded == 'true' || env.incorrect_screen_format == 'true' || env.validation_error == 'true' }}
