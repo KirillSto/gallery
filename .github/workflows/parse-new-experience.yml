@@ -127,7 +127,7 @@ jobs:
             mv ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}_new.zip ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip
           else
             echo "validation_error=true" >> "$GITHUB_ENV"
-            echo "validation_comment=${validation_comment}" >> "$GITHUB_ENV"
+            echo "${validation_comment}"
             rm -rf ../../../experiences/${{ env.experience_name }}/
           fi
           rm -rf ../../../anytype-heart/
@@ -144,7 +144,8 @@ jobs:
             ${{ steps.check-experience-field.outputs.zip_file_comment }}\n
             ${{ steps.check-restrictions.outputs.title_length_comment }}\n
             ${{ steps.check-restrictions.outputs.description_length_comment }}\n
-            ${{ steps.check-screenshot-format.outputs.screenshot_format_comment }}"
+            ${{ steps.check-screenshot-format.outputs.screenshot_format_comment }}\n
+            ${{ steps.experience-validator.outputs.validation_comment }}"
 
       - name: Remove label from issue if restrictions are not exceeded
         if: ${{ env.zip_file_missing == 'false' && env.restrictions_exceeded == 'false' && env.incorrect_screen_format == 'false' && env.validation_error == 'false' }}
