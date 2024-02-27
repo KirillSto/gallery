@@ -116,9 +116,11 @@ jobs:
           cd anytype-heart/cmd/usecasevalidator
           go build .
           echo "Validator is built"
+          set +e
           validation_comment=$(./usecasevalidator -path ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip -creator -r -validate -list)
+          validation_result="$?"
           echo "${validation_comment}"
-          if [ $? -eq 0 ]; then
+          if [ ${validation_result} -eq 0 ]; then
             echo "Rewriting archive with the processed one"
             echo "validation_error=false" >> "$GITHUB_ENV"
             mv ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}_new.zip ../../../experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip
