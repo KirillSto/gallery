@@ -21,6 +21,12 @@ var experience = {
   fileSize: 0
 }
 
+// debug
+if (!issue) {
+  console.log(`Debug: No issue.json is found`);
+}
+console.log(`Debug: Issue name = ${issue.name}`);
+
 if (!fs.existsSync('experiences')) {
   fs.mkdirSync('experiences');
 }
