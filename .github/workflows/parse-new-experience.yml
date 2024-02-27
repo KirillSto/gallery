@@ -89,6 +89,8 @@ jobs:
           sudo apt update
           sudo apt install snapd
           sudo snap install pngquant
+          echo "DUBUG!!!"
+          ls experiences/${{ env.experience_name }}/screenshots/
           pngquant --force --ext=.png experiences/${{ env.experience_name }}/screenshots/*.png
           file_size=$(stat -c %s "experiences/${{ env.experience_name }}/${{ env.experience_name }}.zip")
           jq --arg file_size $file_size '.fileSize = ($file_size|tonumber)' "experiences/${{ env.experience_name }}/manifest.json" > temp.json && mv temp.json "experiences/${{ env.experience_name }}/manifest.json"
@@ -104,6 +106,8 @@ jobs:
           go-version: '~1.20.8'
 
       - name: Run experience validator
+        id: experience-validator
+        if: ${{ env.zip_file_missing == 'false' && env.restrictions_exceeded == 'false' && env.incorrect_screen_format == 'false' }}
         run: |
           git clone https://github.com/anyproto/anytype-heart.git
           cd anytype-heart/cmd/usecasevalidator
