@@ -128,7 +128,7 @@ jobs:
             rm -rf ../../../experiences/${{ env.experience_name }}/
           fi
           rm -rf ../../../anytype-heart/
-          validation_comment=$(echo "<details><summary>Expand to see validator output</summary>${validation_output}</details>")
+          validation_comment=$(echo "<details><summary>Expand to see validator output</summary>${validation_output}</details>") >> "$GITHUB_OUTPUT"
 
       - name: Comment and add label to issue
         if: ${{ env.zip_file_missing == 'true' || env.restrictions_exceeded == 'true' || env.incorrect_screen_format == 'true' || env.validation_error == 'true' }}
