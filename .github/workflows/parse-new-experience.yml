@@ -128,8 +128,8 @@ jobs:
             rm -rf ../../../experiences/${{ env.experience_name }}/
           fi
           rm -rf ../../../anytype-heart/
-          validation_comment=$(echo "<details><summary>Expand to see validator output</summary>${validation_output}</details>") >> "$GITHUB_OUTPUT"
-          echo $validation_comment
+          validation_comment=$(echo "<details><summary>Expand to see validator output</summary>${validation_output}</details>") 
+          echo $validation_comment >> "$GITHUB_OUTPUT"
           echo "${{ steps.experience-validator.outputs.validation_comment }}"
           
 
