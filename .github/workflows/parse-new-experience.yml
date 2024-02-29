@@ -131,7 +131,7 @@ jobs:
           validation_comment=$(echo "<details><summary>Expand to see validator output</summary>${validation_output}</details>")
           {
                 echo 'validation_comment<<EOF'
-                echo "validation_comment"
+                echo "$validation_comment"
                 echo EOF
           } >> "$GITHUB_OUTPUT"
 
