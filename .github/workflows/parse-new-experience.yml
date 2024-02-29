@@ -129,12 +129,7 @@ jobs:
           fi
           rm -rf ../../../anytype-heart/
           validation_comment=$(echo "validation_comment=<details><summary>Expand to see validator output</summary>${validation_output}</details>")
-          {
-                echo '$validation_comment<<EOF'
-                echo "$validation_comment"
-                echo EOF
-          } >> "$GITHUB_OUTPUT"
-          
+          echo "$validation_comment" >> "$GITHUB_OUTPUT"
 
       - name: Comment and add label to issue
         if: ${{ env.zip_file_missing == 'true' || env.restrictions_exceeded == 'true' || env.incorrect_screen_format == 'true' || env.validation_error == 'true' }}
