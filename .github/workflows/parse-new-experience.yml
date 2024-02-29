@@ -128,9 +128,12 @@ jobs:
             rm -rf ../../../experiences/${{ env.experience_name }}/
           fi
           rm -rf ../../../anytype-heart/
-          validation_comment=$(echo "validation_comment=<details><summary>Expand to see validator output</summary>${validation_output}</details>") 
-          echo $validation_comment >> "$GITHUB_OUTPUT"
-          echo "${{ steps.experience-validator.outputs.validation_comment }}"
+          validation_comment=$(echo "validation_comment=<details><summary>Expand to see validator output</summary>${validation_output}</details>")
+          {
+                echo '$validation_comment<<EOF'
+                echo "$validation_comment"
+                echo EOF
+          } >> "$GITHUB_OUTPUT"
           
 
       - name: Comment and add label to issue
