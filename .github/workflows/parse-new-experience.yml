@@ -111,7 +111,7 @@ jobs:
         if: ${{ env.zip_file_missing == 'false' && env.restrictions_exceeded == 'false' && env.incorrect_screen_format == 'false' }}
         uses: actions/checkout@v4
         with:
-          repository: https://github.com/anyproto/anytype-heart.git
+          repository: anyproto/anytype-heart
           path: anytype-heart
 
       - name: Run experience validator
