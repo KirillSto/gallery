@@ -1,0 +1,18 @@
+{
+  "$schema": "https://tools.gallery.any.coop/experience.schema.json",
+  "id": "58fa869a-7f41-422d-b157-d4c8d0b3360c",
+  "name": "para",
+  "author": "https://github.com/KirillSto",
+  "license": "MIT",
+  "title": "para",
+  "description": "para",
+  "categories": [
+    "Dashboard"
+  ],
+  "language": "en-US",
+  "screenshots": [
+    "https://storage.gallery.any.coop/para/screenshots/screenshot-1.png"
+  ],
+  "downloadLink": "https://storage.gallery.any.coop/para/para.zip",
+  "fileSize": 2908210
+}
