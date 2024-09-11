@@ -109,7 +109,11 @@ jobs:
 
       - name: Download validator
         if: ${{ env.zip_file_missing == 'false' && env.restrictions_exceeded == 'false' && env.incorrect_screen_format == 'false' }}
-        uses: actions/checkout@v4
+        run: |
+          make download-tantivy
+
+      - name: Download libs for validator build
+        if: ${{ env.zip_file_missing == 'false' && env.restrictions_exceeded == 'false' && env.incorrect_screen_format == 'false' }}
         with:
           repository: anyproto/anytype-heart
           path: anytype-heart
