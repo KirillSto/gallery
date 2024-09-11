@@ -117,7 +117,7 @@ jobs:
       - name: Download libs for validator build
         if: ${{ env.zip_file_missing == 'false' && env.restrictions_exceeded == 'false' && env.incorrect_screen_format == 'false' }}
         run: |
-          cd anytype-heart/cmd/usecasevalidator
+          cd anytype-heart
           make download-tantivy
 
       - name: Run experience validator
