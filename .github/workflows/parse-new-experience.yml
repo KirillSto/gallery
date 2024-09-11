@@ -113,10 +113,11 @@ jobs:
         with:
           repository: anyproto/anytype-heart
           path: anytype-heart
-          
+
       - name: Download libs for validator build
         if: ${{ env.zip_file_missing == 'false' && env.restrictions_exceeded == 'false' && env.incorrect_screen_format == 'false' }}
         run: |
+          cd anytype-heart/cmd/usecasevalidator
           make download-tantivy
 
       - name: Run experience validator
