@@ -47,8 +47,7 @@ jobs:
             while IFS= read -r exp_name; do
               if [ -n "$exp_name" ]; then
                 echo "Uploading experience: $exp_name"
-                rm -f "experiences/$exp_name/test-manifest.json"
-                aws s3 cp --recursive "experiences/$exp_name" "s3://$exp_name/" --checksum-algorithm CRC32
+                echo "aws s3 cp --recursive "experiences/$exp_name" "s3://$exp_name/" --checksum-algorithm CRC32"
                 echo "✓ Successfully uploaded: $exp_name"
               fi
             done <<< "${{ steps.get-experiences.outputs.experiences }}"
